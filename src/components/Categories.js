@@ -1,8 +1,16 @@
 import React from 'react'
+import '../styles/Categories.css'
 
 function Categories() {
   return (
-    <div>Categories</div>
+    <div>
+      <ul>
+        <li>Auto</li>
+        <li>Tech</li>
+        <li>Pets</li>
+        <li>Free Stuff</li>
+      </ul>
+    </div>
   )
 }
 
