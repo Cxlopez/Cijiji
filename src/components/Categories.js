@@ -1,10 +1,10 @@
 import React from 'react'
-import '../styles/Categories.css'
+
 
 function Categories() {
   return (
     <div>
-      <ul>
+      <ul className='categories'>
         <li>Auto</li>
         <li>Tech</li>
         <li>Pets</li>
