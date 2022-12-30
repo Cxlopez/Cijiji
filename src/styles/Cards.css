@@ -1,0 +1,21 @@
+img {
+  height: 100px;
+  width: 50%;
+}
+
+.card-content {
+  background-color: aqua;
+  width: 50%;
+}
+
+.card {
+  background-color: blueviolet;
+  width: 70%;
+}
+.card-container {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+
+}
