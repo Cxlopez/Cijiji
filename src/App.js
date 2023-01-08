@@ -14,10 +14,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/' element={<MyCijiji />} />
-        <Route path='/' element={<Post />} />
-        <Route path='/' element={<Favourites />} />
-        <Route path='/' element={<Messages />} />
+        <Route path='/myCijiji' element={<MyCijiji />} />
+        <Route path='/post' element={<Post />} />
+        <Route path='/favourites' element={<Favourites />} />
+        <Route path='/messages' element={<Messages />} />
       </Routes>
     </div>
   );

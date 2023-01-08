@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/NavBar.css'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseUser, faUser, faCamera, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,34 +11,34 @@ function NavBar() {
     <nav className='nav'>
       <ul className='nav-list'>
         <li>
-          <a href="/" >
+          <Link to="/" >
             <FontAwesomeIcon icon={faHouseUser} className='navBar-icon' />
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/myCijiji">
+          <Link to="/myCijiji">
             <FontAwesomeIcon icon={faUser} className='navBar-icon' />
             <span>My Cijiji</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/post">
+          <Link to="/post">
             <FontAwesomeIcon icon={faCamera} className='navBar-icon' />
             <span>Post</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/favourites">
+          <Link to="/favourites">
             <FontAwesomeIcon icon={faHeart} className='navBar-icon' />
             <span>Favourites</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/messages">
+          <Link to="/messages">
             <FontAwesomeIcon icon={faComment} className='navBar-icon' />
             <span>Messages</span>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
