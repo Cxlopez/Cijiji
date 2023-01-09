@@ -1,0 +1,13 @@
+.message-nav {
+  top: 0;
+  background-color: #373373;
+  height: 60px;
+  text-align: center;
+}
+
+.message-nav p {
+  margin: 0;
+  padding-top: 35px;
+  font-family:Arial, Helvetica, sans-serif;
+  color: white;
+}

@@ -17,7 +17,7 @@ body {
 
 .categories-icon {
   height: 20px;
-  color: rgb(4, 18, 121);
+  color: #373373;
   background-color: rgb(228, 232, 247);;
   padding: 10px;
   border-radius:50%;
@@ -25,10 +25,10 @@ body {
 
 .categories span {
   display: block;
-  color: rgb(4, 18, 121);
-  font-family:'Times New Roman', Times, serif ;
-  font-size: small;
-  padding-bottom: 5px;
+  color: #373373;
+  font-family: Arial, Helvetica, sans-serif ;
+  font-size: 11px;
+  padding-bottom: 7px;
 }
 
 .categories {
@@ -53,7 +53,7 @@ body {
   padding-top: 5px;
   margin-bottom: 15px;
   text-align: center;
-  color: rgb(4, 18, 121);
+  color: #373373;
 }
 
 .search-icon {
