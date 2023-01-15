@@ -2,7 +2,11 @@ import React from 'react'
 
 function MyCijiji() {
   return (
-    <div>MyCijiji</div>
+    <div>
+      <nav className='message-nav'>
+        <p>My Cijiji</p>
+      </nav>
+    </div>
   )
 }
 
