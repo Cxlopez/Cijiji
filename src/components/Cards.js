@@ -4,34 +4,22 @@ import "../styles/Cards.css"
 function Cards() {
   return (
     <div className='card-container'>
-      <div className='card'>
-        <div className='card-content'>
+      <div className='row'>
+        <div className='card'>
           <img src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/gallery/gate_hura_03.jpg" alt="car" />
+          <h4>lamborghini 10/10</h4>
         </div>
-      </div>
-      <div className='card'>
-        <div className='card-content'>
+        <div className='card'>
           <img src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/gallery/gate_hura_03.jpg" alt="car" />
+          <h4>lamborghini 10/10</h4>
         </div>
-      </div>
-      <div className='card'>
-        <div className='card-content'>
+        <div className='card'>
           <img src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/gallery/gate_hura_03.jpg" alt="car" />
+          <h4>lamborghini 10/10</h4>
         </div>
-      </div>
-      <div className='card'>
-        <div className='card-content'>
+        <div className='card'>
           <img src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/gallery/gate_hura_03.jpg" alt="car" />
-        </div>
-      </div>
-      <div className='card'>
-        <div className='card-content'>
-          <img src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/gallery/gate_hura_03.jpg" alt="car" />
-        </div>
-      </div>
-      <div className='card'>
-        <div className='card-content'>
-          <img src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/gallery/gate_hura_03.jpg" alt="car" />
+          <h4>lamborghini 10/10</h4>
         </div>
       </div>
     </div>
