@@ -18,7 +18,7 @@ body {
 .categories-icon {
   height: 20px;
   color: #373373;
-  background-color: rgb(228, 232, 247);;
+  background-color: #f3f3f9;;
   padding: 10px;
   border-radius:50%;
 }
@@ -66,4 +66,5 @@ body {
 .search input {
   border-radius: 10px;
   border: 1px solid #aaa;
+  margin-bottom: 10px;
 }
