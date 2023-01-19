@@ -4,7 +4,14 @@
   padding: 5px;
   height: auto;
   border-radius: 5px;
-  text-align: center;
+  box-shadow: 0 0 3px  rgb(223, 223, 223), 0 0 5px  rgb(175, 172, 193);
+}
+
+.card p {
+  margin-top: 3px;
+  font-family:Arial, Helvetica, sans-serif ;
+  font-style: normal;
+  margin-bottom: 38px;
 }
 
 .card img {
@@ -21,4 +28,11 @@
 
 @media (min-width: 399px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+.card-icon {
+  padding: 2px;
+  height: 19px;
+  color: rgb(193, 195, 196);
+  float: right;
 }
