@@ -1,3 +1,9 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card {
   background-color: rgb(251, 251, 251);
   color: rgb(27, 26, 26);
@@ -26,8 +32,16 @@
   gap: 0.5rem;
 }
 
-@media (min-width: 399px) {
+@media (min-width: 375px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 650px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1200px) {
+  .cards { grid-template-columns: repeat(4, 1fr); }
 }
 
 .card-icon {

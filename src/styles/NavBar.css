@@ -37,7 +37,8 @@
   z-index: 1100;
   border-style: solid none none none;
   border-width: 1px;
-  border-color: rgb(194, 191, 191);
+  border-color: rgb(231, 230, 230);
+  box-shadow: 0 0 10px  rgb(241, 241, 241), 0 0 10px  rgb(212, 210, 222)
 }
 
 
