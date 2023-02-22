@@ -3,7 +3,7 @@ import "../styles/Mycijiji.css"
 function MyCijiji() {
   return (
     <div>
-      <nav className='message-nav'>
+      <nav className='myCijiji-nav'>
         <p>My Cijiji</p>
       </nav>
     </div>
