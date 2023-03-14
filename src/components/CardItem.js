@@ -10,7 +10,7 @@ function CardItem({ad}) {
         <div className='card'>
           <img src={ad.thumbnail_url} alt="car" />
           <p>{ad.title}</p>
-          <span>{ad.price}</span>
+          <span>{`$${ad.price}`}</span>
           <FontAwesomeIcon icon={faHeart} className='card-icon' />
         </div>
 
