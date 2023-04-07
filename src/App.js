@@ -6,6 +6,7 @@ import Post from './pages/Post';
 import Favourites from './pages/Favourites';
 import Messages from './pages/Messages';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/favourites' element={<Favourites />} />
         <Route path='/messages' element={<Messages />} />
         <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
       </Routes>
     </div>
   );

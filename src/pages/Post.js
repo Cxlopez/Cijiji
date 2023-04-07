@@ -1,109 +1,86 @@
-import React, { useState } from 'react';
+import { React, useRef } from 'react';
 import axios from 'axios';
-import '../styles/Post.css';
+// import '../styles/Post.css';
 
 function Post() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
-  const [thumbnail_url, setThumbnail] = useState(null);
-  const [category, setCategory] = useState('');
+  const adTitle = useRef();
+  const adDescription = useRef();
+  const adPrice = useRef();
+  const adPhoto = useRef();
+  const adCategory = useRef();
 
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handlePriceChange = (event) => {
-    setPrice(event.target.value);
-  };
-
-  const handleThumbnailChange = (event) => {
-    setThumbnail(event.target.files[0]);
-  };
-
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  async function handleCreateAd (event) {
     event.preventDefault();
-    const adData = new FormData();
-    adData.append('title', title);
-    adData.append('description', description);
-    adData.append('price', price);
-    adData.append('thumbnail_url', thumbnail_url);
-    adData.append('category', category);
-    axios.post('http://localhost:8000/api/ads', adData)
-      .then(response => {
-        console.log(response.data);
-        // Here you can do anything you want with the server response
-      })
-      .catch(error => {
-        console.error(error);
-        // Here you can handle any errors that occurred during the request
-      });
-  };
+
+
+      const data = {
+        title: adTitle.current.value,
+        description: adDescription.current.value,
+        price: adPrice.current.value,
+        thumbnail_url: adPhoto.current.value,
+        category: adCategory.current.value,
+
+      }
+
+      const URL_CIJIJI_API = 'http://localhost:8000/api/ads';
+      const adCreated = await axios.post
+      (URL_CIJIJI_API, data)
+      .then(window.location = "/myCijiji")
+      console.log(adCreated);
+  }
 
   return (
     <div className="Post-container">
       <h1 className="Post-title">Post an Ad</h1>
-      <form className="Post-form" onSubmit={handleSubmit}>
+      <form className="Post-form" onSubmit={handleCreateAd}>
         <div className="form-group">
           <label className="Post-label" htmlFor="title">Title</label>
           <input
+            ref={adTitle}
             type="text"
             className="form-control Post-input"
             id="title"
             placeholder="Enter title"
-            value={title}
-            onChange={handleTitleChange}
             required
           />
         </div>
         <div className="form-group">
           <label className="Post-label" htmlFor="description">Description</label>
           <textarea
+            ref={adDescription}
             className="form-control Post-input"
             id="description"
             placeholder="Enter description"
-            value={description}
-            onChange={handleDescriptionChange}
             required
           />
         </div>
         <div className="form-group">
           <label className="Post-label" htmlFor="price">Price</label>
           <input
+            ref={adPrice}
             type="number"
             className="form-control Post-input"
             id="price"
             placeholder="Enter price"
-            value={price}
-            onChange={handlePriceChange}
             required
           />
         </div>
         <div className="form-group">
           <label className="Post-label" htmlFor="thumbnail_url">Thumbnail</label>
           <input
+            ref={adPhoto}
             type="file"
             className="form-control-file Post-input-file"
             id="thumbnail_url"
-            onChange={handleThumbnailChange}
             required
           />
         </div>
         <div className="form-group">
           <label className="Post-label" htmlFor="category">Category</label>
           <select
+            ref={adCategory}
             className="form-control Post-input"
             id="category"
-            value={category}
-            onChange={handleCategoryChange}
             required
           >
             <option value="">Choose category...</option>
