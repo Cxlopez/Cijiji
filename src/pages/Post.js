@@ -6,7 +6,7 @@ function Post() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
-  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnail_url, setThumbnail] = useState(null);
   const [category, setCategory] = useState('');
 
   const handleTitleChange = (event) => {
@@ -35,7 +35,7 @@ function Post() {
     adData.append('title', title);
     adData.append('description', description);
     adData.append('price', price);
-    adData.append('thumbnail', thumbnail);
+    adData.append('thumbnail_url', thumbnail_url);
     adData.append('category', category);
     axios.post('http://localhost:8000/api/ads', adData)
       .then(response => {
@@ -88,11 +88,11 @@ function Post() {
           />
         </div>
         <div className="form-group">
-          <label className="Post-label" htmlFor="thumbnail">Thumbnail</label>
+          <label className="Post-label" htmlFor="thumbnail_url">Thumbnail</label>
           <input
             type="file"
             className="form-control-file Post-input-file"
-            id="thumbnail"
+            id="thumbnail_url"
             onChange={handleThumbnailChange}
             required
           />
