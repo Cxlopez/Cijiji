@@ -12,21 +12,30 @@ function Post() {
   async function handleCreateAd (event) {
     event.preventDefault();
 
+    const data = {
+      title: adTitle.current.value,
+      description: adDescription.current.value,
+      price: adPrice.current.value,
+      thumbnail_url: adPhoto.current.value,
+      category: adCategory.current.value,
+    };
 
-      const data = {
-        title: adTitle.current.value,
-        description: adDescription.current.value,
-        price: adPrice.current.value,
-        thumbnail_url: adPhoto.current.value,
-        category: adCategory.current.value,
+    const URL_CIJIJI_API = 'http://localhost:8000/api/ads';
 
-      }
+    const sessionCookie = sessionStorage.getItem('session');
 
-      const URL_CIJIJI_API = 'http://localhost:8000/api/ads';
-      const adCreated = await axios.post
-      (URL_CIJIJI_API, data)
-      .then(window.location = "/myCijiji")
+    const headers = { 
+      'Content-Type': 'application/json', 
+      'Authorization': `Bearer ${sessionCookie}`
+    };
+  
+    try {
+      const adCreated = await axios.post(URL_CIJIJI_API, data, {headers});
       console.log(adCreated);
+      window.location = "/myCijiji";
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -94,7 +103,6 @@ function Post() {
       </form>
     </div>
   );
-  
 }
 
 export default Post;

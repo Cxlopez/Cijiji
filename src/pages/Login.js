@@ -16,7 +16,7 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:8000/api/auth/login', data);
       if (response.status === 200) {
-        window.location = '/myCijiji';
+        window.location = '/post';
       } else {
         console.log(response.data);
       }
