@@ -1,108 +1,121 @@
-import { React, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
-// import '../styles/Post.css';
+import Cookies from 'js-cookie';
+import { useNavigate  } from 'react-router-dom';
 
 function Post() {
-  const adTitle = useRef();
-  const adDescription = useRef();
-  const adPrice = useRef();
-  const adPhoto = useRef();
-  const adCategory = useRef();
+  const [title, setTitle] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [price, setPrice] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  
+  let navigate = useNavigate();
 
-  async function handleCreateAd (event) {
+  const adPhoto = useRef();
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    const data = {
-      title: adTitle.current.value,
-      description: adDescription.current.value,
-      price: adPrice.current.value,
-      thumbnail_url: adPhoto.current.value,
-      category: adCategory.current.value,
+    const token = Cookies.get('token');
+    if (!token) {
+      navigate.push('/login');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('thumbnail', thumbnail);
+    formData.append('description', description);
+    formData.append('category', category);
+    formData.append('price', price);
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
     };
 
-    const URL_CIJIJI_API = 'http://localhost:8000/api/ads';
-
-    const sessionCookie = sessionStorage.getItem('session');
-
-    const headers = { 
-      'Content-Type': 'application/json', 
-      'Authorization': `Bearer ${sessionCookie}`
-    };
-  
     try {
-      const adCreated = await axios.post(URL_CIJIJI_API, data, {headers});
-      console.log(adCreated);
-      window.location = "/myCijiji";
+      const timestamp = new Date().getTime();
+      const response = await axios.post(`http://localhost:8000/api/ads?timestamp=${timestamp}`, formData, config);
+      console.log(response.data)
+      navigate.push('/myCijiji');
     } catch (error) {
-      console.log(error);
+      setErrorMessage('Failed to create ad.');
     }
   }
 
+  function handleThumbnailChange(event) {
+    setThumbnail(event.target.files[0]);
+  }
+
   return (
-    <div className="Post-container">
-      <h1 className="Post-title">Post an Ad</h1>
-      <form className="Post-form" onSubmit={handleCreateAd}>
-        <div className="form-group">
-          <label className="Post-label" htmlFor="title">Title</label>
+    <div>
+      <h1>Create Ad</h1>
+      {errorMessage && <p>{errorMessage}</p>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="title">Title:</label>
           <input
-            ref={adTitle}
             type="text"
-            className="form-control Post-input"
             id="title"
-            placeholder="Enter title"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
             required
           />
         </div>
-        <div className="form-group">
-          <label className="Post-label" htmlFor="description">Description</label>
+        <div>
+          <label htmlFor="description">Description:</label>
           <textarea
-            ref={adDescription}
-            className="form-control Post-input"
             id="description"
-            placeholder="Enter description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
             required
-          />
+          ></textarea>
         </div>
-        <div className="form-group">
-          <label className="Post-label" htmlFor="price">Price</label>
+        <div>
+          <label htmlFor="price">Price:</label>
           <input
-            ref={adPrice}
             type="number"
-            className="form-control Post-input"
             id="price"
-            placeholder="Enter price"
+            value={price}
+            onChange={(event) => setPrice(event.target.value)}
             required
           />
         </div>
-        <div className="form-group">
-          <label className="Post-label" htmlFor="thumbnail_url">Thumbnail</label>
+        <div>
+          <label htmlFor="thumbnail">Thumbnail:</label>
           <input
-            ref={adPhoto}
             type="file"
-            className="form-control-file Post-input-file"
-            id="thumbnail_url"
+            id="thumbnail"
+            ref={adPhoto}
+            onChange={handleThumbnailChange}
             required
           />
         </div>
-        <div className="form-group">
-          <label className="Post-label" htmlFor="category">Category</label>
+        <div>
+          <label htmlFor="category">Category:</label>
           <select
-            ref={adCategory}
-            className="form-control Post-input"
             id="category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
             required
           >
-            <option value="">Choose category...</option>
-            <option value="Autos">Autos</option>
-            <option value="Tech">Tech</option>
-            <option value="Homes">Homes</option>
-            <option value="Pets">Pets</option>
+            <option value="">Select a category</option>
+            <option value="autos">autos</option>
+            <option value="tech">tech</option>
+            <option value="homes">homes</option>
+            <option value="pets">pets & Garden</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary Post-submit">Submit</button>
+        <button type="submit">Create Ad</button>
       </form>
     </div>
   );
 }
 
 export default Post;
+

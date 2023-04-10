@@ -1,73 +1,44 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
-function Register() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const nameRef = useRef();
+const Register = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
-  async function handleRegister(event) {
-    event.preventDefault();
-
-    const data = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      name: nameRef.current.value
-    };
-
-    try {
-      const response = await axios.post('http://localhost:8000/api/auth/register', data);
-      if (response.status === 201) {
-        window.location = '/login';
-      } else {
-        console.log(response.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post('http://localhost:8000/api/auth/register', {
+      email,
+      password,
+      name,
+    });
+    Cookies.set('loggedIn', true);
+    Cookies.set('userId', response.data.user.id);
+    window.location = '/post';
+  };
 
   return (
-    <div className="Register-container">
-      <h1 className="Register-title">Register</h1>
-      <form className="Register-form" onSubmit={handleRegister}>
-        <div className="form-group">
-          <label className="Register-label" htmlFor="email">Email address</label>
-          <input
-            ref={emailRef}
-            type="email"
-            className="form-control Register-input"
-            id="email"
-            placeholder="Enter email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="Register-label" htmlFor="password">Password</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            className="form-control Register-input"
-            id="password"
-            placeholder="Enter password"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="Register-label" htmlFor="name">Name</label>
-          <input
-            ref={nameRef}
-            type="text"
-            className="form-control Register-input"
-            id="name"
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary Register-submit">Register</button>
+    <div>
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <label>
+          Name:
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
-}
+};
 
 export default Register;

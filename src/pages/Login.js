@@ -1,61 +1,44 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
-function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  async function handleLogin(event) {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post('http://localhost:8000/api/auth/login', {
+      email,
+      password,
+    });
 
-    const data = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-
-    try {
-      const response = await axios.post('http://localhost:8000/api/auth/login', data);
-      if (response.status === 200) {
-        window.location = '/post';
-      } else {
-        console.log(response.data);
-      }
-    } catch (error) {
-      console.log(error);
+    if (response && response.data && response.data.user) {
+      const userId = response.data.user.id || ''; // set default value to empty string
+      Cookies.set('loggedIn', true);
+      Cookies.set('userId', userId);
+      window.location = '/post';
+    } else {
+      console.error('Invalid response from server:', response);
     }
-  }
+  };
 
   return (
-    <div className="Login-container">
-      <h1 className="Login-title">Login</h1>
-      <form className="Login-form" onSubmit={handleLogin}>
-        <div className="form-group">
-          <label className="Login-label" htmlFor="email">Email address</label>
-          <input
-            ref={emailRef}
-            type="email"
-            className="form-control Login-input"
-            id="email"
-            placeholder="Enter email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="Login-label" htmlFor="password">Password</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            className="form-control Login-input"
-            id="password"
-            placeholder="Enter password"
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary Login-submit">Login</button>
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
-}
+};
 
 export default Login;
-
