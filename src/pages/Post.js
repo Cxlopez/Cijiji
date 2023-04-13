@@ -11,7 +11,7 @@ function Post() {
   const [price, setPrice] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const adPhoto = useRef();
 
@@ -20,7 +20,7 @@ function Post() {
 
     const token = Cookies.get('token');
     if (!token) {
-      navigate.push('/login');
+      navigate('/login');
       return;
     }
 
@@ -42,7 +42,7 @@ function Post() {
       const timestamp = new Date().getTime();
       const response = await axios.post(`http://localhost:8000/api/ads?timestamp=${timestamp}`, formData, config);
       console.log(response.data)
-      navigate.push('/myCijiji');
+      navigate('/myCijiji');
     } catch (error) {
       setErrorMessage('Failed to create ad.');
     }
