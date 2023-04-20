@@ -15,6 +15,7 @@ function Post() {
 
   const adPhoto = useRef();
 
+  console.log('Before handleSubmit()')
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -40,13 +41,16 @@ function Post() {
 
     try {
       const timestamp = new Date().getTime();
+      console.log(formData);
       const response = await axios.post(`http://localhost:8000/api/ads?timestamp=${timestamp}`, formData, config);
       console.log(response.data)
       navigate('/myCijiji');
     } catch (error) {
+      console.log(error);
       setErrorMessage('Failed to create ad.');
     }
   }
+  console.log('After handleSbmit()');
 
   function handleThumbnailChange(event) {
     setThumbnail(event.target.files[0]);

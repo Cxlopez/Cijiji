@@ -8,20 +8,28 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:8000/api/auth/login', {
-      email,
-      password,
-    });
-
-    if (response && response.data && response.data.user) {
-      const userId = response.data.user.id || ''; // set default value to empty string
-      Cookies.set('loggedIn', true);
-      Cookies.set('userId', userId);
-      window.location = '/post';
-    } else {
-      console.error('Invalid response from server:', response);
+    try {
+      const response = await axios.post('http://localhost:8000/api/auth/login', {
+        email,
+        password,
+      });
+      console.log(response.data);
+      
+      const { message, token } = response.data;
+      if (message === 'User logged in successfully!' && token) {
+        Cookies.set('loggedIn', true, {sameSite: 'strict', secure: false});
+        Cookies.set('token', token, {sameSite: 'strict', secure: false});
+        console.log('Cookies set:', Cookies.get('loggedIn'), Cookies.get('token'));
+        window.location = '/post';
+      } else {
+        console.error('Invalid response from server:', response);
+      }
+    } catch (error) {
+      console.log(error.message);
+      console.error('Error logging in user:', error);
     }
   };
+  
 
   return (
     <div>

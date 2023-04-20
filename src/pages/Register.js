@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -9,14 +8,12 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:8000/api/auth/register', {
-      email,
-      password,
-      name,
-    });
-    Cookies.set('loggedIn', true);
-    Cookies.set('userId', response.data.user.id);
-    window.location = '/post';
+  await axios.post('http://localhost:8000/api/auth/register', {
+    email,
+    password,
+    name,
+  });
+  window.location = '/login';
   };
 
   return (
